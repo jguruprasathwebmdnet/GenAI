@@ -31,7 +31,7 @@ def initialize_session_state():
         st.session_state['temperature'] = []
     # Initializes the OpenAI API key variable
     if 'api_key' not in st.session_state:
-        st.session_state['api_key'] = ""
+        st.session_state['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'] = ""
     # Initializes the use index variable to determine if we use index in replies
     if 'use_index' not in st.session_state:
         st.session_state['use_index'] = False
@@ -90,9 +90,7 @@ def download_button():
 def get_user_config():
     # Define a few AI models the user can choose from.
     model_options = {
-        "GPT-3.5 Turbo (16K tokens)": "gpt-3.5-turbo-16k-0613", # Recommended as it has a 16K token limit, much higher than the other two. This allows longer 'memory recall'.
-        "GPT-3.5 Turbo": "gpt-3.5-turbo", # Fewer token version of above - not recommended
-        "GPT-4": "gpt-4" # Latest model from OpenAI. Recommended for complex chatbots, though has a lower token limit, higher token usage cost, and slower returns.
+        "GPT-3.5 Turbo (16K tokens)": "gpt-3.5-turbo-16k-0613"
     }
 
     # Display button choices in the sidebar of the app for the user to pick their desired model from the ones just defined.
