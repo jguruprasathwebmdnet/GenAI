@@ -4,7 +4,7 @@ import random  # Import the random library
 import time  # Import the time library
 
 # 2. Creating a title for our streamlit web application
-st.title("Simple chat")  # Set the title of the web application
+st.title("Global Production chat box")  # Set the title of the web application
 
 # 3. Initializing the chat history in the session state (how the chatbot tracks things)
 if "messages" not in st.session_state:  # Check if "messages" exists in session state
