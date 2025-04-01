@@ -85,3 +85,35 @@ def download_button():
         file_name='conversation.txt',
         mime='text/plain'
     )
+    # Note: Add this code into your setup_set.py file
+#7.  This function is designed to capture the user's preferences for how the chatbot should respond. The possibilities here are endless!
+def get_user_config():
+    # Define a few AI models the user can choose from.
+    model_options = {
+        "GPT-3.5 Turbo (16K tokens)": "gpt-3.5-turbo-16k-0613", # Recommended as it has a 16K token limit, much higher than the other two. This allows longer 'memory recall'.
+        "GPT-3.5 Turbo": "gpt-3.5-turbo", # Fewer token version of above - not recommended
+        "GPT-4": "gpt-4" # Latest model from OpenAI. Recommended for complex chatbots, though has a lower token limit, higher token usage cost, and slower returns.
+    }
+
+    # Display button choices in the sidebar of the app for the user to pick their desired model from the ones just defined.
+    st.sidebar.markdown("<b style='color: darkgreen;'>Choose a GPT model:</b>", unsafe_allow_html=True) # HTML for beautifying the label, not necessary
+    # Create the radio button. Label is hidden (since we have HTMl label), it defaults to the first option (turbo 16k) of the model_options above.
+    model_name = st.sidebar.radio("", list(model_options.keys()), index=0, label_visibility="collapsed") 
+
+    # Display a slider option for the user to choose 'temperature' or randomness of the chatbot responses. Higher values are recommended for creative chatbots.
+    st.sidebar.markdown("<b style='color: darkgreen;'>Choose a temperature (randomness):</b>", unsafe_allow_html=True)
+    temperature = st.sidebar.slider("", min_value=0.1, max_value=1.0, value=0.5, step=0.1, label_visibility="collapsed")
+
+    # Display an input text box to capture user's OpenAI API key so that the chatbot will be able to generate responses
+    st.sidebar.markdown("<b style='color: darkgreen;'>Enter OpenAI API Key to use chatbot:</b>", unsafe_allow_html=True)
+    api_key = st.sidebar.text_input("", type="password", label_visibility="collapsed")  # Hides the entered text for privacy
+
+    # Display a checkbox to include users data so that the chatbot will be able to append information to its responses
+    st.sidebar.markdown("<b style='color: darkgreen;'>Use indexed data for responses:</b>", unsafe_allow_html=True)
+    use_index = st.sidebar.checkbox("", value=st.session_state.get('use_index', False), label_visibility="collapsed")
+
+    # Save the values to the Streamlit 'memory' to be used later
+    st.session_state['model_name'] = model_options[model_name]
+    st.session_state['temperature'] = temperature
+    st.session_state['api_key'] = api_key
+    st.session_state['use_index'] = use_index
